@@ -1,0 +1,306 @@
+
+
+create table t_transaction
+(
+transaction_id          int(10)  NOT NULL  primary key
+);
+
+create table t_product
+(
+product_id		int(5)	NOT NULL  primary key,
+value			varchar(4)  NOT NULL,  
+Location		varchar(5)  NOT NULL
+);
+
+create table t_value
+(
+value			varchar(4)  NOT NULL  primary key,
+product_id		int(5)	NOT NULL
+);
+
+create table t_time
+(
+date			date  NOT NULL  primary key,
+transaction_id          int(10) NOT NULL,
+time			varchar(5)  NOT NULL,
+day			string(3)  NOY NULL
+);
+
+create table t_lines
+(
+transaction_id          int(10) NOT NULL,
+product_id		int(5)	NOT NULL,
+date			date  NOT NULL,
+value			varchar(4)  NOT NULL
+);
+
+
+----------------------------------------------------------------------------------------
+
+
+
+show databases;
+
+create database staffs_uni;
+
+use staffs_uni;
+
+
+create table t_transaction
+(
+transaction_id          int(10)  NOT NULL  primary key
+);
+
+create table t_product
+(
+product_id		int(5)	NOT NULL  primary key,  
+location		varchar(5)  NOT NULL
+);
+
+create table t_value
+(
+value			varchar(4)  NOT NULL  primary key,
+);
+
+create table t_time
+(
+date			date  NOT NULL  primary key,
+time			varchar(5)  NOT NULL,
+day			string(3)  NOY NULL
+);
+
+create table t_lines
+(
+);
+
+
+alter table t_product
+add constraint value_fk 
+foreign key (value)
+references t_value (value)
+
+alter table t_value
+add constraint product_id_fk 
+foreign key (product_id)
+references t_product (product_id)
+
+alter table t_time
+add constraint transaction_id_fk 
+foreign key (transaction_id)
+references t_transaction (transaction_id)
+
+alter table t_lines
+add constraint transaction_id_fk 
+foreign key (transaction_id)
+references t_transaction (transaction_id)
+
+alter table t_lines
+add constraint product_id_fk 
+foreign key (product_id)
+references t_product (product_id)
+
+alter table t_lines
+add constraint value_fk 
+foreign key (value)
+references t_value (value)
+
+alter table t_lines
+add constraint date_fk 
+foreign key (date)
+references t_time (date)
+
+
+
+----------------------------------------------------------------------------------------
+
+REMOVING THE VALUE/TIME TABLE
+
+Create Tables...
+
+show databases;
+
+create database staffs_uni;
+
+use staffs_uni;
+
+create table t_transaction
+(
+transaction_id int(10) NOT NULL primary key,
+date date NOT NULL,
+time varchar(5) NOT NULL,
+day varchar(3)  NOT NULL
+);
+
+create table t_product
+(
+product_id int(5) NOT NULL primary key,
+value varchar(4) NOT NULL,  
+Location varchar(5) NOT NULL
+);
+
+create table t_lines
+(
+line_id int(5) NOT NULL primary key
+);
+
+show tables;
+
+Constraints...
+
+alter table t_lines
+add constraint transaction_id_fk 
+foreign key (transaction_id)
+references t_transaction (transaction_id)
+
+alter table t_lines
+add constraint product_id_fk 
+foreign key (product_id)
+references t_product (product_id)
+
+----------------------------------------------------------------------------------------
+
+Test data
+
+# t_transaction
+
+create sequence transaction_seq
+
+insert into t_transaction (transaction_seq.nextval,'15-FEB-21','10:13','Mon');
+insert into t_transaction (transaction_seq.nextval,'15-FEB-21','11:36','Mon');
+insert into t_transaction (transaction_seq.nextval,'15-FEB-21','12:01','Mon');
+insert into t_transaction (transaction_seq.nextval,'15-FEB-21','13:42','Mon');
+insert into t_transaction (transaction_seq.nextval,'15-FEB-21','13:58','Mon');
+insert into t_transaction (transaction_seq.nextval,'15-FEB-21','14:27','Mon');
+insert into t_transaction (transaction_seq.nextval,'15-FEB-21','15:39','Mon');
+insert into t_transaction (transaction_seq.nextval,'16-FEB-21','09:32','Tue');
+insert into t_transaction (transaction_seq.nextval,'16-FEB-21','10:11','Tue');
+insert into t_transaction (transaction_seq.nextval,'16-FEB-21','11:08','Tue');
+insert into t_transaction (transaction_seq.nextval,'16-FEB-21','11:53','Tue');
+insert into t_transaction (transaction_seq.nextval,'16-FEB-21','13:50','Tue');
+insert into t_transaction (transaction_seq.nextval,'17-FEB-21','09:12','Wed');
+insert into t_transaction (transaction_seq.nextval,'17-FEB-21','10:35','Wed');
+insert into t_transaction (transaction_seq.nextval,'17-FEB-21','12:04','Wed');
+insert into t_transaction (transaction_seq.nextval,'17-FEB-21','13:22','Wed');
+insert into t_transaction (transaction_seq.nextval,'17-FEB-21','14:45','Wed');
+insert into t_transaction (transaction_seq.nextval,'17-FEB-21','15:10','Wed');
+insert into t_transaction (transaction_seq.nextval,'17-FEB-21','16:12','Wed');
+insert into t_transaction (transaction_seq.nextval,'18-FEB-21','10:18','Thu');
+insert into t_transaction (transaction_seq.nextval,'18-FEB-21','11:48','Thu');
+insert into t_transaction (transaction_seq.nextval,'18-FEB-21','13:37','Thu');
+insert into t_transaction (transaction_seq.nextval,'18-FEB-21','14:16','Thu');
+insert into t_transaction (transaction_seq.nextval,'18-FEB-21','15:34','Thu');
+insert into t_transaction (transaction_seq.nextval,'19-FEB-21','09:06','Fri');
+insert into t_transaction (transaction_seq.nextval,'19-FEB-21','09:52','Fri');
+insert into t_transaction (transaction_seq.nextval,'19-FEB-21','10:31','Fri');
+insert into t_transaction (transaction_seq.nextval,'19-FEB-21','11:47','Fri');
+insert into t_transaction (transaction_seq.nextval,'19-FEB-21','12:18','Fri');
+insert into t_transaction (transaction_seq.nextval,'19-FEB-21','13:44','Fri');
+insert into t_transaction (transaction_seq.nextval,'19-FEB-21','14:25','Fri');
+insert into t_transaction (transaction_seq.nextval,'19-FEB-21','16:28','Fri');
+
+
+# 32 total
+
+# t_product
+
+create sequence product_seq
+
+insert into t_product (product_seq.nextval,'Low','1.1');
+insert into t_product (product_seq.nextval,'Low','2.4');
+insert into t_product (product_seq.nextval,'Low','3.4');
+insert into t_product (product_seq.nextval,'Low','-1.1');
+insert into t_product (product_seq.nextval,'Med','-3.-2');
+insert into t_product (product_seq.nextval,'Med','5.-2');
+insert into t_product (product_seq.nextval,'Med','-2.-1');
+insert into t_product (product_seq.nextval,'Med','-2.5');
+insert into t_product (product_seq.nextval,'Med','4.-2');
+insert into t_product (product_seq.nextval,'Med','3.-2');
+insert into t_product (product_seq.nextval,'High','-3.-2');
+insert into t_product (product_seq.nextval,'High','3.3');
+insert into t_product (product_seq.nextval,'High','4.5');
+insert into t_product (product_seq.nextval,'High','1.4');
+insert into t_product (product_seq.nextval,'High','1.-3');
+insert into t_product (product_seq.nextval,'High','-2.-4');
+
+# 16 total
+
+# t_lines
+
+create sequence line_seq
+
+insert into line_id (line_seq.nextval,1,1);
+insert into line_id (line_seq.nextval,2,1);
+insert into line_id (line_seq.nextval,2,2);
+insert into line_id (line_seq.nextval,3,4);
+insert into line_id (line_seq.nextval,3,7);
+insert into line_id (line_seq.nextval,4,3);
+insert into line_id (line_seq.nextval,5,8);
+insert into line_id (line_seq.nextval,5,11);
+insert into line_id (line_seq.nextval,5,14);
+insert into line_id (line_seq.nextval,6,9);
+insert into line_id (line_seq.nextval,6,5);
+insert into line_id (line_seq.nextval,7,6);
+insert into line_id (line_seq.nextval,8,6);
+insert into line_id (line_seq.nextval,9,10);
+insert into line_id (line_seq.nextval,10,15);
+insert into line_id (line_seq.nextval,10,1);
+insert into line_id (line_seq.nextval,10,16);
+insert into line_id (line_seq.nextval,11,12);
+insert into line_id (line_seq.nextval,11,13);
+insert into line_id (line_seq.nextval,12,4);
+insert into line_id (line_seq.nextval,13,7);
+insert into line_id (line_seq.nextval,13,3);
+insert into line_id (line_seq.nextval,14,8);
+insert into line_id (line_seq.nextval,14,5);
+insert into line_id (line_seq.nextval,14,1);
+insert into line_id (line_seq.nextval,15,12);
+insert into line_id (line_seq.nextval,16,6);
+insert into line_id (line_seq.nextval,16,15);
+insert into line_id (line_seq.nextval,17,4);
+insert into line_id (line_seq.nextval,18,16);
+insert into line_id (line_seq.nextval,18,13);
+insert into line_id (line_seq.nextval,19,11);
+insert into line_id (line_seq.nextval,19,8);
+insert into line_id (line_seq.nextval,20,4);
+insert into line_id (line_seq.nextval,20,1);
+insert into line_id (line_seq.nextval,21,6);
+insert into line_id (line_seq.nextval,22,7);
+insert into line_id (line_seq.nextval,23,13);
+insert into line_id (line_seq.nextval,23,12);
+insert into line_id (line_seq.nextval,24,5);
+insert into line_id (line_seq.nextval,25,8);
+insert into line_id (line_seq.nextval,25,13);
+insert into line_id (line_seq.nextval,26,14);
+insert into line_id (line_seq.nextval,26,3);
+insert into line_id (line_seq.nextval,26,6);
+insert into line_id (line_seq.nextval,27,2);
+insert into line_id (line_seq.nextval,27,9);
+insert into line_id (line_seq.nextval,28,12);
+insert into line_id (line_seq.nextval,29,16);
+insert into line_id (line_seq.nextval,29,14);
+insert into line_id (line_seq.nextval,30,6);
+insert into line_id (line_seq.nextval,31,8);
+insert into line_id (line_seq.nextval,32,4);
+insert into line_id (line_seq.nextval,32,13);
+
+commit;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
